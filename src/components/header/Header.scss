@@ -5,4 +5,16 @@
   justify-content: space-between;
   align-items: center;
   -webkit-app-region: drag;
+  .header-right {
+    display: flex;
+    align-items: center;
+    .header-btn {
+      font-size: 14px;
+      margin: 5px;
+      -webkit-app-region: no-drag;
+      &:hover {
+        color: rgb(96, 199, 152);
+      }
+    }
+  }
 }
