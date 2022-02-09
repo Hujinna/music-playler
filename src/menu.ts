@@ -187,7 +187,7 @@ export default class MenuBuilder {
       process.env.NODE_ENV === 'development' ||
       process.env.DEBUG_PROD === 'true'
         ? subMenuViewDev
-        : subMenuViewProd;
+        : subMenuViewDev;
 
     return [subMenuAbout, subMenuEdit, subMenuView, subMenuWindow, subMenuHelp];
   }
