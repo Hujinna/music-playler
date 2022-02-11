@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import {
   MinusOutlined,
@@ -9,8 +11,21 @@ import { isWin32 } from '../../utils/tools';
 import styles from './Header.scss';
 
 const thisWindow = remote.getCurrentWindow();
+const { BrowserWindow } = remote;
+let LoginWindow: Electron.BrowserWindow;
 
 const header = () => {
+  const handleLogin = () => {
+    console.log('弹出子窗口');
+    // if (!LoginWindow) {
+    //   LoginWindow = new BrowserWindow({
+    //     width: 540,
+    //     height: 468,
+    //     center: true,
+    //   });
+    // }
+    // LoginWindow.show();
+  };
   const handleMinimize = () => {
     if (thisWindow && !thisWindow.isDestroyed()) thisWindow.minimize();
   };
@@ -25,9 +40,7 @@ const header = () => {
   };
 
   const handleClose = () => {
-    console.log('close');
     if (thisWindow && !thisWindow.isDestroyed()) {
-      console.log(123);
       thisWindow.close();
     }
   };
@@ -36,7 +49,7 @@ const header = () => {
     <div className={styles.header}>
       <input type="text" placeholder="搜索音乐" />
       <div className={styles['header-right']}>
-        <span>点击登录</span>
+        <span onClick={handleLogin}>点击登录</span>
         {isWin32 ? (
           <div>
             <button
@@ -56,7 +69,7 @@ const header = () => {
             <button
               type="button"
               className={styles['header-btn']}
-              onClick={() => console.log('123')}
+              onClick={handleClose}
             >
               <CloseOutlined />
             </button>

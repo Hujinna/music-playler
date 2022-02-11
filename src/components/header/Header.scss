@@ -8,6 +8,12 @@
   .header-right {
     display: flex;
     align-items: center;
+    & > span {
+      font-size: 14px;
+      &:hover {
+        cursor: pointer;
+      }
+    }
     .header-btn {
       font-size: 14px;
       margin: 5px;
