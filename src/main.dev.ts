@@ -25,6 +25,7 @@ export default class AppUpdater {
 }
 
 let mainWindow: BrowserWindow | null = null;
+const loginWindow: BrowserWindow | null = null;
 
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
@@ -81,6 +82,11 @@ const createWindow = async () => {
       enableRemoteModule: true,
     },
   });
+
+  // loginWindow = new BrowserWindow({
+  //   width: 540,
+  //   height: 468,
+  // });
 
   mainWindow.loadURL(`file://${__dirname}/index.html`);
 

@@ -1,0 +1,23 @@
+.choice {
+  .banner-img {
+    width: 98%;
+    height: 100%;
+    border-radius: 10px;
+  }
+  .suggest-choice {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .suggest-title {
+      display: flex;
+      font-size: 20px;
+    }
+    .suggest-more {
+      font-size: 14px;
+      color: rgba(0, 0, 0, 0.5);
+      &:hover {
+        color: rgb(95, 199, 151);
+      }
+    }
+  }
+}

@@ -24,14 +24,14 @@ export default function App() {
         <div className="main">
           <Header />
           <Switch>
-            <Route exact path="/" component={Music} />
+            <Route path="/music" component={Music} />
             <Route path="/video" component={Video} />
             <Route path="/audio" component={Radio} />
             <Route path="/favor" component={Favor} />
             <Route path="/local" component={Local} />
             <Route path="/download" component={Download} />
             <Route path="/recent" component={Recent} />
-            <Redirect to="/" />
+            <Redirect to="/music" />
           </Switch>
         </div>
       </Router>

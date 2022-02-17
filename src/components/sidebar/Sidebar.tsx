@@ -1,21 +1,76 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import styles from './Sidebar.scss';
 
-const Sidebar = () => {
+interface SidebarProps {
+  location: { pathname: string };
+}
+
+const onlineList = [
+  {
+    id: '音乐馆',
+    path: '/music',
+  },
+  {
+    id: '视频',
+    path: '/video',
+  },
+  {
+    id: '电台',
+    path: '/audio',
+  },
+];
+const myList = [
+  {
+    id: '我喜欢',
+    path: '/favor',
+  },
+  {
+    id: '本地歌曲',
+    path: '/local',
+  },
+  {
+    id: '下载歌曲',
+    path: '/download',
+  },
+  {
+    id: '最近播放',
+    path: '/recent',
+  },
+];
+
+const Sidebar = (props: SidebarProps) => {
+  const {
+    location: { pathname },
+  } = props;
   return (
     <div className={styles.sidebar}>
       <p>在线音乐</p>
-      <NavLink to="/">音乐馆</NavLink>
-      <NavLink to="/video">视频</NavLink>
-      <NavLink to="/audio">电台</NavLink>
+      {onlineList.map((item) => {
+        return (
+          <NavLink
+            to={item.path}
+            key={item.id}
+            className={pathname.startsWith(item.path) ? styles.active : ''}
+          >
+            {item.id}
+          </NavLink>
+        );
+      })}
       <p>我的音乐</p>
-      <NavLink to="/favor">我喜欢</NavLink>
-      <NavLink to="/local">本地歌曲</NavLink>
-      <NavLink to="/download">下载歌曲</NavLink>
-      <NavLink to="/recent">最近播放</NavLink>
+      {myList.map((item) => {
+        return (
+          <NavLink
+            to={item.path}
+            key={item.id}
+            className={pathname.startsWith(item.path) ? styles.active : ''}
+          >
+            {item.id}
+          </NavLink>
+        );
+      })}
     </div>
   );
 };
 
-export default Sidebar;
+export default withRouter(Sidebar);

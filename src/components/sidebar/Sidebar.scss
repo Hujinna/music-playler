@@ -1,6 +1,5 @@
 .sidebar {
   height: 100%;
-  width: 210px;
   background-color: rgb(238, 238, 238);
   display: flex;
   flex-direction: column;
@@ -14,7 +13,7 @@
     font-size: 14px;
     color: black;
     display: block;
-    width: 156px;
+    width: 140px;
     height: 30px;
     display: flex;
     align-items: center;
@@ -23,9 +22,13 @@
     &:hover {
       background-color: rgb(219, 219, 219);
     }
-    &:active {
-      background-image: linear-gradient(rgb(100, 207, 175), rgb(96, 199, 152));
-      color: white;
-    }
+  }
+  .active {
+    background-image: linear-gradient(
+      to right,
+      rgb(100, 207, 175),
+      rgb(95, 199, 151)
+    );
+    color: white;
   }
 }
