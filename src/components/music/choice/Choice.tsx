@@ -14,6 +14,10 @@ interface ChoiceProps {
 const Choice = (props: ChoiceProps) => {
   const { history } = props;
   const [banner, setBanner] = useState([]);
+  const [recommandSongs, setRecommandSongs] = useState([]);
+  const [radius, setRadius] = useState([]);
+  const [newest, setNewest] = useState([]);
+
   useEffect(() => {
     api
       .getBanner()
@@ -21,6 +25,49 @@ const Choice = (props: ChoiceProps) => {
         const { banners, code } = res.data;
         if (code === 200) {
           setBanner(banners);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  useEffect(() => {
+    api
+      .getRecommondSong()
+      .then((res) => {
+        const { result, code } = res.data;
+        if (code === 200) {
+          setRecommandSongs(result);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  useEffect(() => {
+    api
+      .getRadioList()
+      .then((res) => {
+        const { result, code } = res.data;
+        if (code === 200) {
+          setRadius(result.slice(0, 4));
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  useEffect(() => {
+    api
+      .getNewest()
+      .then((res) => {
+        console.log(res);
+        const { data, code } = res.data;
+        if (code === 200) {
+          setNewest(data);
         }
       })
       .catch((err) => {
@@ -41,8 +88,8 @@ const Choice = (props: ChoiceProps) => {
     slidesToScroll: 1,
   };
 
-  const handleMore = () => {
-    history.push('/music/songs');
+  const handleMore = (router: string) => {
+    history.push(router);
   };
 
   return (
@@ -66,9 +113,71 @@ const Choice = (props: ChoiceProps) => {
         <div className={styles['suggest-title']}>
           <p>推荐歌单</p>
         </div>
-        <div className={styles['suggest-more']} onClick={handleMore}>
+        <div
+          className={styles['suggest-more']}
+          onClick={() => handleMore('/music/songs')}
+        >
           更多 {'>'}
         </div>
+      </div>
+      <div className={styles['suggest-songs']}>
+        {recommandSongs.map((item: any) => {
+          return (
+            <div key={item.id} className={styles['suggest-songs-item']}>
+              <img src={item.picUrl} alt="热门推荐" />
+              <p>{`${item.name.slice(0, 10)}...`}</p>
+            </div>
+          );
+        })}
+      </div>
+      <div />
+      {/* 推荐有声电台 */}
+      {/* <div className={styles['suggest-choice']}>
+        <div className={styles['suggest-title']}>
+          <p>推荐有声电台</p>
+        </div>
+        <div
+          className={styles['suggest-more']}
+          onClick={() => handleMore('/music/voice')}
+        >
+          更多 {'>'}
+        </div>
+      </div>
+      <div className={styles['suggest-songs']}>
+        {radius.map((item: any) => {
+          return (
+            <div key={item.id} className={styles['suggest-songs-item']}>
+              <img src={item.picUrl} alt="有声电台" />
+              <p>{`${item.name.slice(0, 10)}...`}</p>
+            </div>
+          );
+        })}
+      </div>
+      <div /> */}
+      {/* 最新发布 */}
+      <div className={styles['suggest-choice']}>
+        <div className={styles['suggest-title']}>
+          <p>最新发布</p>
+        </div>
+        <div
+          className={styles['suggest-more']}
+          onClick={() => handleMore('/music/new')}
+        >
+          更多 {'>'}
+        </div>
+      </div>
+      <div className={styles['suggest-songs']}>
+        {newest.map((item: any) => {
+          return (
+            <div key={item.id} className={styles['newest-songs-item']}>
+              <img src={item.cover} alt="最新发布" />
+              <p>
+                {item.name}
+                {item.artistName}
+              </p>
+            </div>
+          );
+        })}
       </div>
       <div />
     </div>

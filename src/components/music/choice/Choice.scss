@@ -1,4 +1,6 @@
 .choice {
+  overflow-y: auto;
+  height: 420px;
   .banner-img {
     width: 98%;
     height: 100%;
@@ -17,6 +19,43 @@
       color: rgba(0, 0, 0, 0.5);
       &:hover {
         color: rgb(95, 199, 151);
+      }
+    }
+  }
+  .suggest-songs {
+    display: flex;
+    justify-content: space-between;
+    .suggest-songs-item {
+      font-size: 14px;
+      & > img {
+        width: 160px;
+        height: 160px;
+        border-radius: 10px;
+        &:hover {
+          transform: translateY(-10px);
+          transition: 500ms;
+          cursor: pointer;
+        }
+      }
+      & > p:hover {
+        color: rgb(95, 199, 151);
+        cursor: pointer;
+      }
+    }
+    .newest-songs-item {
+      & > img {
+        width: 220px;
+        height: 130px;
+        border-radius: 10px;
+        &:hover {
+          transform: translateY(-10px);
+          transition: 500ms;
+          cursor: pointer;
+        }
+      }
+      & > p:hover {
+        color: rgb(95, 199, 151);
+        cursor: pointer;
       }
     }
   }
