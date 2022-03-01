@@ -1,5 +1,8 @@
+::-webkit-scrollbar {
+  width: 0px;
+}
 .choice {
-  overflow-y: auto;
+  overflow-y: scroll;
   height: 420px;
   .banner-img {
     width: 98%;

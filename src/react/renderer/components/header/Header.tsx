@@ -6,25 +6,16 @@ import {
   BorderOutlined,
   CloseOutlined,
 } from '@ant-design/icons';
-import { remote } from 'electron';
-import { isWin32 } from '../../utils/tools';
+import { ipcRenderer, remote } from 'electron';
+import { isWin32 } from '../../../../utils/tools';
 import styles from './Header.scss';
 
 const thisWindow = remote.getCurrentWindow();
-const { BrowserWindow } = remote;
-let LoginWindow: Electron.BrowserWindow;
 
 const header = () => {
   const handleLogin = () => {
-    console.log('弹出子窗口');
-    // if (!LoginWindow) {
-    //   LoginWindow = new BrowserWindow({
-    //     width: 540,
-    //     height: 468,
-    //     center: true,
-    //   });
-    // }
-    // LoginWindow.show();
+    // console.log('弹出子窗口');
+    ipcRenderer.send('login-window-show');
   };
   const handleMinimize = () => {
     if (thisWindow && !thisWindow.isDestroyed()) thisWindow.minimize();

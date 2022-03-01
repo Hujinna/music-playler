@@ -13,6 +13,8 @@ import baseConfig from './webpack.config.base';
 import CheckNodeEnv from '../scripts/CheckNodeEnv';
 import DeleteSourceMaps from '../scripts/DeleteSourceMaps';
 
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 CheckNodeEnv('production');
 DeleteSourceMaps();
 
@@ -27,16 +29,24 @@ export default merge(baseConfig, {
 
   target: 'electron-renderer',
 
-  entry: [
-    'core-js',
-    'regenerator-runtime/runtime',
-    path.join(__dirname, '../../src/index.tsx'),
-  ],
+  entry:{
+    index: [
+      'core-js',
+      'regenerator-runtime/runtime',
+      require.resolve('../../src/react/renderer/index.tsx'),
+    ],
+    login: [
+      'core-js',
+      'regenerator-runtime/runtime',
+      require.resolve('../../src/react/renderer-login/index.tsx'),
+    ],
+  },
+
 
   output: {
-    path: path.join(__dirname, '../../src/dist'),
-    publicPath: './dist/',
-    filename: 'renderer.prod.js',
+    path: path.join(__dirname, '../../src/dist/'),
+    publicPath: './dist',
+    filename: '[name]/[name].renderer.prod.js',
   },
 
   module: {
@@ -218,8 +228,27 @@ export default merge(baseConfig, {
       DEBUG_PROD: false,
     }),
 
+    new HtmlWebpackPlugin({
+      filename: 'index/index.html',
+      template: path.resolve(__dirname, '../../src/pages/index.html'),
+      // inject: true,
+      // minify: {
+      //   removeComments: true,
+      //   collapseWhitespace: true
+      // }
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'login/login.html',
+      template: path.resolve(__dirname, '../../src/pages/login.html'),
+      // inject: true,
+      // minify: {
+      //   removeComments: true,
+      //   collapseWhitespace: true
+      // }
+    }),
+
     new MiniCssExtractPlugin({
-      filename: 'style.css',
+      filename: '[name]/[name].style.css',
     }),
 
     new BundleAnalyzerPlugin({

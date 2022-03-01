@@ -11,10 +11,11 @@
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import path from 'path';
-import { app, BrowserWindow, shell } from 'electron';
+import { app, BrowserWindow, ipcMain, shell } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
+import { isDev } from './utils/tools';
 
 export default class AppUpdater {
   constructor() {
@@ -25,7 +26,7 @@ export default class AppUpdater {
 }
 
 let mainWindow: BrowserWindow | null = null;
-const loginWindow: BrowserWindow | null = null;
+let loginWindow: BrowserWindow | null = null;
 
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
@@ -78,17 +79,18 @@ const createWindow = async () => {
     icon: getAssetPath('icon.png'),
     frame: false,
     webPreferences: {
-      nodeIntegration: true,
       enableRemoteModule: true,
+      nodeIntegration: true,
+      contextIsolation: false,
+      nodeIntegrationInWorker: true,
     },
   });
 
-  // loginWindow = new BrowserWindow({
-  //   width: 540,
-  //   height: 468,
-  // });
-
-  mainWindow.loadURL(`file://${__dirname}/index.html`);
+  if (isDev) {
+    mainWindow.loadURL(`file://${__dirname}/pages/index.html`);
+  } else {
+    mainWindow.loadURL(`file://${__dirname}/dist/index/index.html`);
+  }
 
   // @TODO: Use 'ready-to-show' event
   //        https://github.com/electron/electron/blob/master/docs/api/browser-window.md#using-ready-to-show-event
@@ -122,9 +124,56 @@ const createWindow = async () => {
   new AppUpdater();
 };
 
+const createLoginWindow = async () => {
+  if (
+    process.env.NODE_ENV === 'development' ||
+    process.env.DEBUG_PROD === 'true'
+  ) {
+    await installExtensions();
+  }
+
+  loginWindow = new BrowserWindow({
+    width: 540,
+    height: 350,
+    show: false,
+    webPreferences: {
+      enableRemoteModule: true,
+      nodeIntegration: true,
+      contextIsolation: false,
+      nodeIntegrationInWorker: true,
+    },
+  });
+
+  if (isDev) {
+    loginWindow.loadURL(`file://${__dirname}/pages/login.html`);
+  } else {
+    loginWindow.loadURL(`file://${__dirname}/dist/login/login.html`);
+  }
+
+  loginWindow.webContents.on('did-finish-load', () => {
+    if (!loginWindow) {
+      throw new Error('"loginWindow" is not defined');
+    }
+    if (process.env.START_MINIMIZED) {
+      loginWindow.minimize();
+    } else {
+      loginWindow.show();
+      loginWindow.focus();
+    }
+  });
+
+  loginWindow.on('closed', () => {
+    loginWindow = null;
+  });
+};
+
 /**
  * Add event listeners...
  */
+
+ipcMain.on('login-window-show', () => {
+  createLoginWindow();
+});
 
 app.on('window-all-closed', () => {
   // Respect the OSX convention of having the application in memory even

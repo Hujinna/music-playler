@@ -4,7 +4,7 @@
 /* eslint-disable promise/always-return */
 import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
-import api from '../../../utils/axios';
+import api from '../../../../../utils/axios';
 import styles from './Choice.scss';
 
 interface ChoiceProps {
@@ -64,7 +64,7 @@ const Choice = (props: ChoiceProps) => {
     api
       .getNewest()
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         const { data, code } = res.data;
         if (code === 200) {
           setNewest(data);
