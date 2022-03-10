@@ -1,0 +1,25 @@
+.songs {
+  .songs-top {
+    display: flex;
+    font-size: 14px;
+    .songs-top-type {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 120px;
+      height: 34px;
+      background: rgba(221, 221, 221, 0.7);
+      border-radius: 5px;
+      margin: 3px;
+      &:hover {
+        color: rgb(95, 199, 151);
+        cursor: pointer;
+      }
+    }
+  }
+  .songs-bottom {
+    & > p {
+      font-size: 20px;
+    }
+  }
+}

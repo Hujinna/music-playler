@@ -3,7 +3,7 @@
 }
 .choice {
   overflow-y: scroll;
-  height: 420px;
+  height: calc(100% - 100px);
   .banner-img {
     width: 98%;
     height: 100%;
@@ -30,9 +30,9 @@
     justify-content: space-between;
     .suggest-songs-item {
       font-size: 14px;
+      width: 25%;
       & > img {
-        width: 160px;
-        height: 160px;
+        width: 95%;
         border-radius: 10px;
         &:hover {
           transform: translateY(-10px);
@@ -46,9 +46,11 @@
       }
     }
     .newest-songs-item {
+      & > p {
+        font-size: 14px;
+      }
       & > img {
-        width: 220px;
-        height: 130px;
+        width: 95%;
         border-radius: 10px;
         &:hover {
           transform: translateY(-10px);

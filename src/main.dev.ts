@@ -172,7 +172,17 @@ const createLoginWindow = async () => {
  */
 
 ipcMain.on('login-window-show', () => {
-  createLoginWindow();
+  if (loginWindow) {
+    loginWindow.focus();
+  } else {
+    createLoginWindow();
+  }
+});
+
+ipcMain.on('login-success', () => {
+  if (loginWindow) {
+    loginWindow.close();
+  }
 });
 
 app.on('window-all-closed', () => {

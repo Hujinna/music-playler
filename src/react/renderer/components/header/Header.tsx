@@ -1,22 +1,30 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   MinusOutlined,
   BorderOutlined,
   CloseOutlined,
 } from '@ant-design/icons';
 import { ipcRenderer, remote } from 'electron';
+import Select from 'react-select';
 import { isWin32 } from '../../../../utils/tools';
 import styles from './Header.scss';
+import { getLoginInfo, isLogin } from '../../../../utils/login';
 
 const thisWindow = remote.getCurrentWindow();
 
+const options = [
+  { value: '水星记', label: '水星记' },
+  { value: '至少还有你', label: '至少还有你' },
+  { value: '后悔无期', label: '后会无期' },
+];
+
 const header = () => {
   const handleLogin = () => {
-    // console.log('弹出子窗口');
     ipcRenderer.send('login-window-show');
   };
+
   const handleMinimize = () => {
     if (thisWindow && !thisWindow.isDestroyed()) thisWindow.minimize();
   };
@@ -38,9 +46,11 @@ const header = () => {
 
   return (
     <div className={styles.header}>
-      <input type="text" placeholder="搜索音乐" />
+      <Select options={options} />
       <div className={styles['header-right']}>
-        <span onClick={handleLogin}>点击登录</span>
+        <span onClick={handleLogin}>
+          {isLogin() ? getLoginInfo().userName : '点击登录'}
+        </span>
         {isWin32 ? (
           <div>
             <button

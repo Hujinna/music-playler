@@ -62,18 +62,33 @@ const Choice = (props: ChoiceProps) => {
 
   useEffect(() => {
     api
-      .getNewest()
+      .getDujia()
       .then((res) => {
         // console.log(res);
-        const { data, code } = res.data;
+        const { result, code } = res.data;
         if (code === 200) {
-          setNewest(data);
+          setNewest(result);
         }
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
+
+  // useEffect(() => {
+  //   api
+  //     .getDujia()
+  //     .then((res) => {
+  //       console.log(res);
+  //       const { data, code } = res.data;
+  //       // if (code === 200) {
+  //       //   setNewest(data);
+  //       // }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
 
   const settings = {
     dots: true,
@@ -170,11 +185,8 @@ const Choice = (props: ChoiceProps) => {
         {newest.map((item: any) => {
           return (
             <div key={item.id} className={styles['newest-songs-item']}>
-              <img src={item.cover} alt="最新发布" />
-              <p>
-                {item.name}
-                {item.artistName}
-              </p>
+              <img src={item.sPicUrl} alt="最新发布" />
+              <p>{item.name}</p>
             </div>
           );
         })}
