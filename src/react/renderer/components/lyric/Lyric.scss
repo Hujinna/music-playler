@@ -1,0 +1,40 @@
+.lyric{
+  width:100%;
+  .lyric-header{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: flex-end;
+    -webkit-app-region: drag;
+    button{
+      margin: 20px;
+      -webkit-app-region: no-drag;
+    }
+  }
+  .lyric-content{
+    width: 100%;
+    height: calc(100% - 50px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .lyric-left{
+      width: 50%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img{
+        width: 260px;
+        height: 260px;
+      }
+    }
+    .lyric-right{
+      width: 50%;
+      overflow:auto;
+      height: 400px;
+      .lyric-active{
+        color: rgb(95, 199, 151);
+      }
+    }
+  }
+}

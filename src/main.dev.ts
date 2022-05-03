@@ -16,6 +16,7 @@ import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
 import { isDev } from './utils/tools';
+import { IpcMainEvent } from 'electron/main';
 
 export default class AppUpdater {
   constructor() {
@@ -179,9 +180,12 @@ ipcMain.on('login-window-show', () => {
   }
 });
 
-ipcMain.on('login-success', () => {
+ipcMain.on('login-success', (event: IpcMainEvent, uid: any) => {
   if (loginWindow) {
     loginWindow.close();
+  }
+  if (mainWindow) {
+    mainWindow.webContents.send('userinfo-uid', uid);
   }
 });
 

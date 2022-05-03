@@ -1,0 +1,23 @@
+.video{
+  overflow-y: scroll;
+  height: calc(100% - 130px);
+  .video-content{
+    display: flex;
+    .video-item{
+      cursor: pointer;
+      img{
+        width: 230px;
+        height: 128px;
+        border-radius: 5px;
+        margin-right: 20px;
+      }
+      p{
+        margin: 0px;
+        font-size: 12px;
+      }
+      .video-item-author{
+        color: #ccc;
+      }
+    }
+  }
+}

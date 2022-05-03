@@ -19,11 +19,10 @@ const App = () => {
         if (data.code === 200) {
           message.success('登录成功');
           setTimeout(() => {
-            ipcRenderer.send('login-success');
+            ipcRenderer.send('login-success', data.account.id);
             setUserinfo(data.account);
           }, 1000);
           localStorage.setItem('userinfo', JSON.stringify(data.account));
-          console.log(data.account);
         }
       })
       .catch((err) => {

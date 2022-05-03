@@ -1,0 +1,36 @@
+.radio{
+  overflow-y: scroll;
+  height: calc(100% - 100px);
+  &>h3{
+    width: 210px;
+    margin: 10px auto;
+  }
+  .banner-img{
+    width: 80%;
+    height: 200px;
+    margin: 0 auto;
+  }
+  .voice-content{
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 12px;
+    padding-left: 10px;
+    .voice-item{
+      width: 150px;
+      height: 190px;
+      &>img{
+        width: 133px;
+        height: 133px;
+        border-radius: 10px;
+      }
+      &>p{
+        margin: 0px;
+      }
+      &:hover{
+        transform: translateY(-10px);
+        transition: 500ms;
+        cursor: pointer;
+      }
+    }
+  }
+}

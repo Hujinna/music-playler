@@ -8,11 +8,31 @@
   padding-left: 40px;
   padding-right: 40px;
   box-sizing: border-box;
+  input{
+    width: 200px;
+    height: 30px;
+    border-radius: 15px ;
+    border:0;
+    outline: 0;
+    background-color: #eee;
+    text-indent: 1rem;
+    -webkit-app-region: no-drag;
+  }
   .header-right {
     display: flex;
     align-items: center;
+    p{
+      font-size: 12px;
+    }
+    &>img{
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      margin-right: 10px;
+      cursor: pointer;
+    }
     & > span {
-      font-size: 14px;
+      font-size: 12px;
       &:hover {
         cursor: pointer;
       }

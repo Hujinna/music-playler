@@ -23,9 +23,7 @@ const Choice = (props: ChoiceProps) => {
       .getBanner()
       .then((res) => {
         const { banners, code } = res.data;
-        if (code === 200) {
-          setBanner(banners);
-        }
+        setBanner(banners);
       })
       .catch((err) => {
         console.log(err);
@@ -37,9 +35,7 @@ const Choice = (props: ChoiceProps) => {
       .getRecommondSong()
       .then((res) => {
         const { result, code } = res.data;
-        if (code === 200) {
-          setRecommandSongs(result);
-        }
+        setRecommandSongs(result);
       })
       .catch((err) => {
         console.log(err);

@@ -1,0 +1,33 @@
+.download{
+  width: 100%;
+  height: calc(100% - 80px);
+  padding: 0px 40px 40px 40px;
+  box-sizing: border-box;
+  & > h1 {
+    margin: 0;
+  }
+  .download-name {
+    font-size: 14px;
+    & > a {
+      display: inline-block;
+      margin: 10px 50px 10px 0px;
+      &:hover {
+        color: rgb(95, 199, 151);
+      }
+    }
+    .a-active {
+      color: rgb(95, 199, 151);
+    }
+    .download-bar {
+      margin: 6px auto;
+      width: 25px;
+      height: 3px;
+      background-color: rgb(95, 199, 151);
+      border-radius: 1.5px;
+    }
+    .download-bar-hidden {
+      display: none;
+      cursor: pointer;
+    }
+  }
+}

@@ -1,0 +1,43 @@
+.recent{
+  width: 100%;
+  height: calc(100% - 80px);
+  padding: 0px 40px 40px 40px;
+  box-sizing: border-box;
+  & > h1 {
+    margin: 0;
+  }
+  p{
+    margin-left: 20px;
+    color: #ccc;
+    font-size: 12px;
+  }
+  .recent-title{
+    width: 90%;
+    display: flex;
+    margin-left: 20px;
+    border-bottom: 1px solid #eee;
+    padding: 5px;
+    color: #bbb;
+    &>div{
+      width: 200px;
+      font-size: 14px;
+      font-size: 12px;
+    }
+  }
+  .recent-content{
+    .recent-list{
+      width: 90%;
+      display: flex;
+      margin-left: 20px;
+      border-bottom: 1px solid #eee;
+      padding: 10px;
+      &>div{
+        width: 200px;
+        font-size: 14px;
+      }
+      &:hover{
+        background-color: #eee;
+      }
+    }
+  }
+}

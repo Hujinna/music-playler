@@ -1,0 +1,14 @@
+.downloaded{
+  width: 100%;
+  .none{
+    margin: 100px auto;
+    width: 120px;
+    color: #ccc;
+    text-align: center;
+    .open{
+      color: rgb(95, 199, 151);
+      font-size: 12px;
+      cursor: pointer;
+    }
+  }
+}

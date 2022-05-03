@@ -35,11 +35,11 @@ const navList = [
     name: '歌手',
     path: '/music/singer',
   },
-  {
-    id: 'new',
-    name: '最新音乐',
-    path: '/music/new',
-  },
+  // {
+  //   id: 'new',
+  //   name: '最新音乐',
+  //   path: '/music/new',
+  // },
 ];
 
 interface MusicProps {

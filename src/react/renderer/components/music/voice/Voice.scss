@@ -1,0 +1,36 @@
+.voice{
+  overflow-y: scroll;
+  height: calc(100% - 100px);
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  .voice-item{
+    width: 300px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    &>img{
+      width: 60px;
+      height: 60px;
+      border-radius: 5px;
+    }
+    &:hover{
+      background-color: #eee;
+    }
+    .voice-item-right{
+      margin-left:10px;
+      display: flex;
+      flex-direction: column;
+      &>p{
+        font-size: 14px;
+        margin: 0;
+      }
+      .voice-item-name{
+
+      }
+    }
+  }
+}

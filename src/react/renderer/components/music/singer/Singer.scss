@@ -1,0 +1,47 @@
+.singer{
+  overflow-y: scroll;
+  height: calc(100% - 100px);
+  .singer-classify{
+    display: flex;
+    font-size: 14px;
+    &>div{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 80px;
+      height: 30px;
+      border-radius: 15px;
+      border: 1px solid #eee;
+      margin: 8px;
+    }
+    .singer-total{
+      background-color: rgb(96, 199, 152);
+      color: white;
+    }
+    .singer-single{
+      &:hover{
+        color: rgb(96, 199, 152);
+        background-color: #eee;
+      }
+    }
+  }
+  .singer-list{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    .singer-item{
+      width: 170px;
+      height: 200px;
+      margin-top: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-direction: column;
+      &>img{
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+      }
+    }
+  }
+}
