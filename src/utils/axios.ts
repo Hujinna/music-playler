@@ -1,8 +1,7 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://music-player-olive.vercel.app';
-
-// axios.defaults.baseURL = 'http://localhost:3000';
+// axios.defaults.baseURL = 'https://music-player-olive.vercel.app';
+axios.defaults.baseURL = 'http://localhost:3000';
 
 const api = {
   login: (phone: string, password: string) => {

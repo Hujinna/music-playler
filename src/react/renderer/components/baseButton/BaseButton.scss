@@ -1,0 +1,62 @@
+// .btn-containers {
+//     opacity: 1;
+//     background:#3396FA;
+//     border-radius: 5px;
+//     font-size: 12px;
+//     font-family: PingFangSC, PingFangSC-Regular, sans-serif;
+//     font-weight: 400;
+//     text-align: center;
+//     color: #ffffff;
+//     line-height: 12px;
+//     cursor: pointer;
+//     outline: none;
+//     border: none;
+//   }
+
+.btn-containers-primary {
+  cursor: pointer;
+  background: #3396fa;
+  border-radius: 5px;
+  font-size: 12px;
+  font-family: PingFangSC, PingFangSC-Regular, sans-serif;
+  font-weight: 400;
+  text-align: center;
+  color: #ffffff;
+  line-height: 12px;
+  outline: none;
+  border: none;
+
+  &:hover {
+    opacity: 0.75;
+  }
+
+  &[disabled] {
+    cursor: not-allowed;
+    background: #80aeff;
+  }
+}
+
+.btn-containers-default {
+  cursor: pointer;
+  background: #ffffff;
+  border: 1px solid rgba(51, 51, 51, 0.2);
+  border-radius: 5px;
+  font-size: 12px;
+  font-family: PingFangSC, PingFangSC-Regular, sans-serif;
+  font-weight: 400;
+  text-align: center;
+  color: #1f2329;
+  line-height: 12px;
+  outline: none;
+
+  &:hover {
+    opacity: 0.75;
+  }
+
+  &[disabled] {
+    cursor: not-allowed;
+    background: #f5f6f7;
+    border: 1px solid #ebedf0;
+  }
+}
+// }

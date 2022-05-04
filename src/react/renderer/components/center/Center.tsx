@@ -1,16 +1,18 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable promise/always-return */
-import TextArea from 'antd/lib/input/TextArea';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import api from '../../../../utils/axios';
 import { getLoginInfo, removeLoginInfo } from '../../../../utils/login';
+import Modal from '../modal/Modal';
 import styles from './Center.scss';
 
-const Local = () => {
+const Center = (props: { setIsLogin: (value: boolean) => void }) => {
+  const { setIsLogin } = props;
   const [userinfo, setUserinfo] = useState({});
   const [playlists, setPlaylists] = useState([]);
+  const [visible, setVisible] = useState(false);
   const history = useHistory();
 
   const getInfo = () => {
@@ -43,14 +45,24 @@ const Local = () => {
     getInfo();
   }, []);
 
-  const handleLogout = () => {
-    // api.logout();
-    // removeLoginInfo();
-    // history.push('/music');
+  const showModal = () => {
+    setVisible(true);
   };
 
   const handlePush = () => {
     history.push('/favor');
+  };
+
+  const handleOk = () => {
+    setVisible(false);
+    api.logout();
+    removeLoginInfo();
+    history.push('/music');
+    setIsLogin(false);
+  };
+
+  const handleCancel = () => {
+    setVisible(false);
   };
 
   return (
@@ -64,7 +76,7 @@ const Local = () => {
         <button
           type="button"
           className={styles['center-btn']}
-          onClick={handleLogout}
+          onClick={showModal}
         >
           退出登录
         </button>
@@ -84,15 +96,17 @@ const Local = () => {
           rows={10}
           placeholder="如果你有什么好的建议和想法，快来写下吧"
         />
-        {/* <TextArea
-          rows={6}
-          placeholder="如果你有什么好的建议和想法，快来写下吧"
-          maxLength={6}
-        /> */}
         <button type="button">点击提交</button>
       </div>
+      <Modal
+        visible={visible}
+        onCancel={handleCancel}
+        onOk={handleOk}
+        title="退出登录"
+        body={<p>确定要退出登录吗？</p>}
+      />
     </div>
   );
 };
 
-export default Local;
+export default Center;

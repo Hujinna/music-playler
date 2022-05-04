@@ -10,7 +10,6 @@ import {
   CloseOutlined,
 } from '@ant-design/icons';
 import { ipcRenderer, IpcRendererEvent, remote } from 'electron';
-import Select from 'react-select';
 import { useHistory } from 'react-router-dom';
 import { isWin32 } from '../../../../utils/tools';
 import styles from './Header.scss';
@@ -18,21 +17,15 @@ import { getLoginInfo, isLogin } from '../../../../utils/login';
 import api from '../../../../utils/axios';
 
 const thisWindow = remote.getCurrentWindow();
-
-const options = [
-  { value: '水星记', label: '水星记' },
-  { value: '至少还有你', label: '至少还有你' },
-  { value: '后悔无期', label: '后会无期' },
-];
-
 interface HeaderProps {
+  islogin: boolean;
+  setIsLogin: (value: boolean) => void;
   setSearchData: (arg: string[]) => void;
   setSearchList: (arg: any) => void;
 }
 
 const header = (props: HeaderProps) => {
-  const { setSearchData, setSearchList } = props;
-  const [islogin, setIsLogin] = useState(false);
+  const { setSearchData, setSearchList, islogin, setIsLogin } = props;
   const [src, setSrc] = useState('');
   const [nickname, setNickname] = useState('');
   const [inputValue, setInputValue] = useState('');

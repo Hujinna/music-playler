@@ -32,6 +32,7 @@ const App = () => {
   const [curId, setCurId] = useState('441491828');
   const [searchList, setSearchList] = useState([]);
   const [searchData, setSearchData] = useState({});
+  const [islogin, setIsLogin] = useState(false);
 
   const showDrawer = () => {
     setVisible(true);
@@ -57,13 +58,18 @@ const App = () => {
             <Header
               setSearchData={setSearchData}
               setSearchList={setSearchList}
+              islogin={islogin}
+              setIsLogin={setIsLogin}
             />
             <Switch>
               <Route path="/music" component={Music} />
               <Route path="/video" component={Video} />
               <Route path="/audio" component={Radio} />
               <Route path="/favor" component={Favor} />
-              <Route path="/center" component={Center} />
+              <Route
+                path="/center"
+                render={() => <Center setIsLogin={setIsLogin} />}
+              />
               <Route path="/download" component={Download} />
               <Route
                 path="/search"
