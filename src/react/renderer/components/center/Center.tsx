@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable promise/always-return */
+import message from 'antd/lib/message';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import api from '../../../../utils/axios';
@@ -13,6 +14,7 @@ const Center = (props: { setIsLogin: (value: boolean) => void }) => {
   const [userinfo, setUserinfo] = useState({});
   const [playlists, setPlaylists] = useState([]);
   const [visible, setVisible] = useState(false);
+  const [feedback, setFeedback] = useState('');
   const history = useHistory();
 
   const getInfo = () => {
@@ -33,6 +35,7 @@ const Center = (props: { setIsLogin: (value: boolean) => void }) => {
       .getUserDetails(getLoginInfo().id)
       .then((res) => {
         const { profile } = res.data;
+        console.log(profile);
         setUserinfo(profile);
       })
       .catch((err) => {
@@ -65,6 +68,23 @@ const Center = (props: { setIsLogin: (value: boolean) => void }) => {
     setVisible(false);
   };
 
+  const handleChange = (value: string) => {
+    setFeedback(value);
+  };
+
+  const handleClick = () => {
+    const { id } = getLoginInfo();
+    api
+      .add(id, userinfo.nickname, feedback)
+      .then((res) => {
+        message.success('感谢您的反馈');
+        setFeedback('');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <div className={styles.center}>
       <div className={styles['center-top']}>
@@ -95,8 +115,12 @@ const Center = (props: { setIsLogin: (value: boolean) => void }) => {
           cols={30}
           rows={10}
           placeholder="如果你有什么好的建议和想法，快来写下吧"
+          value={feedback}
+          onChange={(e) => handleChange(e.target.value)}
         />
-        <button type="button">点击提交</button>
+        <button type="button" onClick={handleClick}>
+          点击提交
+        </button>
       </div>
       <Modal
         visible={visible}

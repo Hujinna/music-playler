@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-// axios.defaults.baseURL = 'https://music-player-olive.vercel.app';
-axios.defaults.baseURL = 'http://localhost:3000';
+axios.defaults.baseURL = 'https://music-player-olive.vercel.app';
+// axios.defaults.baseURL = 'http://localhost:3000';
 
 const api = {
   login: (phone: string, password: string) => {
@@ -79,6 +79,36 @@ const api = {
   },
   search: (query: string) => {
     return axios.get(`/search/suggest?keywords=${query}`);
+  },
+  add: (userid: string, username: string, content: string) => {
+    return axios({
+      method: 'post',
+      url: 'http://localhost:4000/service/add',
+      data: {
+        userid,
+        username,
+        content,
+        time: `${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`,
+      },
+      headers: {
+        'Content-type': 'application/json',
+      },
+    });
+  },
+  register: (id: string, name: string, phone: string, password: string) => {
+    return axios({
+      method: 'post',
+      url: 'http://localhost:4000/user/ifregister',
+      data: {
+        id,
+        name,
+        phone,
+        password,
+      },
+      headers: {
+        'Content-type': 'application/json',
+      },
+    });
   },
 };
 

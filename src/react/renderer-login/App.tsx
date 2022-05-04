@@ -10,6 +10,33 @@ const App = () => {
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [userinfo, setUserinfo] = useState({});
+  const [nickname, setNickname] = useState('');
+
+  const register = () => {
+    api
+      .getUserDetails(userinfo.id)
+      .then((res) => {
+        const { profile } = res.data;
+        setNickname(profile.nickname);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    api
+      .register(userinfo.id, nickname, phone, password)
+      .then((res) => {
+        // if (res.code === 200) {
+        message.success('登录成功');
+        setTimeout(() => {
+          ipcRenderer.send('login-success', userinfo.id);
+        }, 1000);
+        // }
+      })
+      .catch((err) => {
+        message.error('登录失败');
+        console.error(err);
+      });
+  };
 
   const handleLogin = () => {
     api
@@ -17,11 +44,8 @@ const App = () => {
       .then((res) => {
         const { data } = res;
         if (data.code === 200) {
-          message.success('登录成功');
-          setTimeout(() => {
-            ipcRenderer.send('login-success', data.account.id);
-            setUserinfo(data.account);
-          }, 1000);
+          register();
+          setUserinfo(data.account);
           localStorage.setItem('userinfo', JSON.stringify(data.account));
         }
       })
