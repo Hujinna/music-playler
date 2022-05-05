@@ -10,16 +10,14 @@ interface PlayProps {
 const Play = (props: PlayProps) => {
   const { videoUrl, isOpen, setOpen } = props;
   return (
-    <div>
-      <ModalVideo
-        channel="custom"
-        url={videoUrl}
-        autoplay
-        isOpen={isOpen}
-        videoId="L61p2uyiMSo"
-        onClose={() => setOpen(false)}
-      />
-    </div>
+    <ModalVideo
+      channel="custom"
+      url={videoUrl}
+      autoplay
+      isOpen={isOpen}
+      videoId="L61p2uyiMSo"
+      onClose={() => setOpen(false)}
+    />
   );
 };
 

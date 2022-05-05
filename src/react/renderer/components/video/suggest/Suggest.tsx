@@ -34,7 +34,7 @@ const Suggest = (props: SuggestProps) => {
 
   return (
     <div className={styles.suggest}>
-      <p>推荐歌单</p>
+      <p>推荐视频</p>
       <div className={styles['suggest-content']}>
         {list.map((item) => {
           return (

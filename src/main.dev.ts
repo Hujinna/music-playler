@@ -14,9 +14,9 @@ import path from 'path';
 import { app, BrowserWindow, ipcMain, shell } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
+import { IpcMainEvent } from 'electron/main';
 import MenuBuilder from './menu';
 import { isDev } from './utils/tools';
-import { IpcMainEvent } from 'electron/main';
 
 export default class AppUpdater {
   constructor() {

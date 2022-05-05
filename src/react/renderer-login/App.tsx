@@ -44,9 +44,13 @@ const App = () => {
       .then((res) => {
         const { data } = res;
         if (data.code === 200) {
-          register();
+          // register();
           setUserinfo(data.account);
           localStorage.setItem('userinfo', JSON.stringify(data.account));
+          message.success('登录成功');
+          setTimeout(() => {
+            ipcRenderer.send('login-success', data.account.id);
+          }, 1000);
         }
       })
       .catch((err) => {
